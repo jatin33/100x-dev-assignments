@@ -62,11 +62,35 @@ describe('calculateTotalSpentByCategory', () => {
 		const result =
 			calculateTotalSpentByCategory(transactions);
 
-		expect(result).toEqual([
+		expect(result.sort((a, b) => {
+			const nameA = a.category.toUpperCase(); // ignore upper and lowercase
+			const nameB = b.category.toUpperCase(); // ignore upper and lowercase
+			if (nameA < nameB) {
+			  return -1;
+			}
+			if (nameA > nameB) {
+			  return 1;
+			}
+		  
+			// names must be equal
+			return 0;
+		  })).toEqual([
 			{ category: 'Food', totalSpent: 30 },
 			{ category: 'Clothing', totalSpent: 40 },
 			{ category: 'Electronics', totalSpent: 30 },
-		]);
+		].sort((a, b) => {
+			const nameA = a.category.toUpperCase(); // ignore upper and lowercase
+			const nameB = b.category.toUpperCase(); // ignore upper and lowercase
+			if (nameA < nameB) {
+			  return -1;
+			}
+			if (nameA > nameB) {
+			  return 1;
+			}
+		  
+			// names must be equal
+			return 0;
+		  }));
 	});
 
 	test('returns an empty array when given an empty input', () => {

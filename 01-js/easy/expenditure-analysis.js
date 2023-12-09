@@ -14,7 +14,24 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+  return transactions.reduce((acc, curr) => {
+    let existingCategory = acc.find((item) => item.category === curr.category);
+    if (existingCategory) {
+      acc = [
+        ...acc.filter((localItem) => localItem.category !== curr.category),
+        {
+          ...existingCategory,
+          totalSpent: curr.price + existingCategory.totalSpent,
+        },
+      ];
+    } else {
+      acc.push({
+        category: curr.category,
+        totalSpent: curr.price,
+      });
+    }
+    return acc;
+  }, []);
 }
 
 module.exports = calculateTotalSpentByCategory;

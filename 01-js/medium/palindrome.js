@@ -4,7 +4,8 @@
 */
 
 function isPalindrome(str) {
-  return true;
+  const toIgnore = [" ", ",", ".", "?", "!"];
+  return str.toLowerCase().split("").filter((item) => !toIgnore.includes(item)).join("") === str.toLowerCase().split("").reverse().filter((item) => !toIgnore.includes(item)).join("")
 }
 
 module.exports = isPalindrome;
